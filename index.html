@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Fibonacci 2026 — Autonomous Smart Farming Rover</title>
+<meta name="description" content="Fibonacci 2026 is an autonomous agricultural rover that measures soil cell by cell, understands individual crop requirements and applies nutrients only where necessary. Presented for the EduStream / WSRO Fibonacci International Competition, Italy." />
+<meta name="theme-color" content="#05070A" />
+<meta property="og:title" content="Fibonacci 2026 — Autonomous Smart Farming Rover" />
+<meta property="og:description" content="Precision nutrients, only where the plant needs them. A sense-to-decide-to-act agricultural system built for the EduStream / WSRO Fibonacci 2026 international competition." />
+<link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+<link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      Fibonacci 2026
+    </a>
+    <div class="header-actions">
+      <button class="icon-btn wide" data-presentation aria-pressed="false" title="Toggle presentation mode">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+        <span class="presentation-label presentation-hide">Present</span>
+      </button>
+      <button class="icon-btn" data-menu-open aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="site-menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="brand"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span> Fibonacci 2026</span>
+    <button class="icon-btn" data-menu-close aria-label="Close menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <div class="menu-body">
+    <nav class="menu-list" aria-label="Pages">
+      <a class="menu-item is-current" href="index.html">
+        <span class="num">01</span>
+        <span class="name">Overview</span>
+        <span class="desc">The agricultural problem, the system that answers it, and the principle behind it.</span>
+      </a>
+      <a class="menu-item" href="technology.html">
+        <span class="num">02</span>
+        <span class="name">Technology</span>
+        <span class="desc">Operating modes, per-cell decisions, crop profiles, architecture and hardware.</span>
+      </a>
+      <a class="menu-item" href="autonomy.html">
+        <span class="num">03</span>
+        <span class="name">Autonomy</span>
+        <span class="desc">Navigation without GPS, and the telemetry the farmer sees during a mission.</span>
+      </a>
+      <a class="menu-item" href="impact.html">
+        <span class="num">04</span>
+        <span class="name">Impact</span>
+        <span class="desc">What the prototype demonstrates, what it should deliver, and what still needs trials.</span>
+      </a>
+    </nav>
+    <aside class="menu-aside">
+      <div>
+        <h4>On this page</h4>
+        <ul>
+          <li><a href="#problem">02 · The agricultural problem</a></li>
+          <li><a href="#solution">03 · The solution</a></li>
+          <li><a href="#closing">13 · Project identity</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Project</h4>
+        <ul>
+          <li><a href="technology.html#modes">Operating modes</a></li>
+          <li><a href="technology.html#architecture">System architecture</a></li>
+          <li><a href="autonomy.html#dashboard">Farmer dashboard</a></li>
+          <li><a href="impact.html#roadmap">Development roadmap</a></li>
+        </ul>
+      </div>
+      <p class="micro" style="line-height:1.9;color:hsl(var(--muted-foreground)/.65)">
+        EduStream / WSRO · Fibonacci International Competition · Italy 2026
+      </p>
+    </aside>
+  </div>
+</div>
+
+<main>
+
+  <!-- ================================================================= HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="container-x">
+      <p class="hero-badge">
+        <span class="dot" aria-hidden="true"></span>
+        EduStream / WSRO — Fibonacci International Competition
+        <span class="sep">·</span> Italy 2026
+      </p>
+
+      <h1>
+        Precision nutrients.
+        <span class="serif-accent">Only where the plant needs them.</span>
+      </h1>
+
+      <p class="lead">
+        An autonomous agricultural rover that measures soil cell-by-cell, understands
+        individual crop requirements and applies nutrients only when necessary.
+      </p>
+
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#solution">
+          Explore the system
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        </a>
+        <a class="btn btn-ghost" href="technology.html">
+          Technology
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+
+      <div class="stat-strip reveal">
+        <div class="stat">
+          <p class="v signal">2</p>
+          <p class="k">Controllers</p>
+          <p class="n">Arduino UNO R3 · ESP32</p>
+        </div>
+        <div class="stat">
+          <p class="v signal">3</p>
+          <p class="k">Crop profiles</p>
+          <p class="n">configurable thresholds</p>
+        </div>
+        <div class="stat">
+          <p class="v signal">4</p>
+          <p class="k">Operating modes</p>
+          <p class="n">plain → custom coordinates</p>
+        </div>
+        <div class="stat">
+          <p class="v signal">IMU</p>
+          <p class="k">Live navigation</p>
+          <p class="n">no GPS dependency</p>
+        </div>
+      </div>
+
+      <figure class="image-frame reveal" style="margin-top:3rem;aspect-ratio:21/9;">
+        <img src="assets/img/probe-sunrise.jpg" alt="The rover's soil probe making contact with the root zone at sunrise" />
+        <div class="scrim"></div>
+        <figcaption class="caption" style="bottom:auto;top:.85rem;left:.85rem;">FIG. 01 — Root-zone contact</figcaption>
+        <div style="position:absolute;inset:0;padding:1rem;display:flex;flex-direction:column;justify-content:space-between;pointer-events:none;">
+          <div style="display:flex;justify-content:space-between;gap:1rem;">
+            <span class="micro-lg" style="color:hsl(var(--signal))">Cell B-04</span>
+            <span class="micro">Profile · Tomato</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;flex-wrap:wrap;">
+            <div style="display:flex;gap:.45rem;flex-wrap:wrap;">
+              <span class="micro" style="padding:.3rem .5rem;border:1px solid hsl(var(--border));border-radius:999px;background:hsl(var(--background)/.5);color:hsl(var(--foreground)/.75)">N 28 mg/kg</span>
+              <span class="micro" style="padding:.3rem .5rem;border:1px solid hsl(var(--border));border-radius:999px;background:hsl(var(--background)/.5);color:hsl(var(--foreground)/.75)">Depth 120 mm · RS485</span>
+            </div>
+            <span class="micro" style="color:hsl(var(--signal))">Status · probing</span>
+          </div>
+        </div>
+      </figure>
+      <div style="display:flex;gap:1.5rem;margin-top:.75rem;flex-wrap:wrap;">
+        <span class="micro" style="color:hsl(var(--muted-foreground)/.6)">Prototype photography</span>
+        <span class="micro" style="color:hsl(var(--muted-foreground)/.6)">Illustrative interface</span>
+      </div>
+
+      <div style="margin-top:4rem;display:grid;gap:.35rem;">
+        <p class="display" style="font-size:clamp(1.5rem,3.4vw,2.6rem);line-height:1.12;">Sense locally.</p>
+        <p class="display serif-accent signal" style="font-size:clamp(1.5rem,3.4vw,2.6rem);line-height:1.12;">Decide intelligently.</p>
+        <p class="display" style="font-size:clamp(1.5rem,3.4vw,2.6rem);line-height:1.12;color:hsl(var(--muted-foreground))">Act only when needed.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================== PROBLEM -->
+  <section class="section" id="problem">
+    <div class="container-x">
+      <div class="section-head reveal">
+        <p class="kicker"><span class="idx">02</span><span class="rule"></span>The agricultural problem</p>
+        <h2 class="display">
+          Fields are managed in averages.
+          <span class="serif-accent" style="display:block;color:hsl(var(--signal))">Plants live in specifics.</span>
+        </h2>
+        <p class="lead">
+          Conventional management treats a field as one uniform body. In practice, nutrient
+          availability, moisture and pH can differ sharply between neighbouring cells — and
+          different crops demand different conditions entirely.
+        </p>
+      </div>
+
+      <div class="grid-cards stack-gap">
+        <article class="card reveal">
+          <p class="card-num">01</p>
+          <h3>Uniform fertilizer application</h3>
+          <p>A single blend and a single rate across the whole field, even where nutrient availability already differs cell by cell.</p>
+        </article>
+        <article class="card reveal" style="transition-delay:60ms">
+          <p class="card-num">02</p>
+          <h3>Fixed irrigation schedules</h3>
+          <p>Water is delivered by timetable rather than by measured root-zone moisture, so wet and dry zones receive the same input.</p>
+        </article>
+        <article class="card reveal" style="transition-delay:120ms">
+          <p class="card-num">03</p>
+          <h3>No plant-level soil information</h3>
+          <p>Soil data typically arrives as a handful of laboratory samples per field, not as a reading at the individual plant.</p>
+        </article>
+        <article class="card reveal" style="transition-delay:60ms">
+          <p class="card-num">04</p>
+          <h3>Labour-intensive sampling</h3>
+          <p>Manual probes and lab submissions are slow, expensive and physically demanding, which limits how often fields are measured.</p>
+        </article>
+        <article class="card reveal" style="transition-delay:120ms">
+          <p class="card-num">05</p>
+          <h3>Intercropped fields share one regime</h3>
+          <p>In strip and intercropped systems, neighbouring crops have different nutrient demands yet are managed as one block.</p>
+        </article>
+        <article class="card reveal" style="transition-delay:180ms">
+          <p class="card-num">06</p>
+          <h3>Runoff and input cost</h3>
+          <p>Nutrients applied where they are not needed can leave the root zone, adding cost without adding yield.</p>
+        </article>
+      </div>
+
+      <!-- comparison -->
+      <div class="compare reveal" style="margin-top:3rem">
+        <div class="compare-block">
+          <p class="cb-label">Uniform application</p>
+          <p class="cb-value">36 / 36 cells</p>
+          <p class="cb-note">One blend, one rate, applied to every cell regardless of what is actually growing in it.</p>
+          <div class="field-wrap" style="margin-top:1rem;padding:.7rem;border:0;background:transparent">
+            <div class="field-grid" data-field data-cols="6" data-rows="6" data-pattern="uniform" data-treated="A-01,A-02,A-03,A-04,A-05,A-06,B-01,B-02,B-03,B-04,B-05,B-06,C-01,C-02,C-03,C-04,C-05,C-06,D-01,D-02,D-03,D-04,D-05,D-06,E-01,E-02,E-03,E-04,E-05,E-06,F-01,F-02,F-03,F-04,F-05,F-06"></div>
+          </div>
+        </div>
+        <div class="compare-block">
+          <p class="cb-label">Cell-level application</p>
+          <p class="cb-value signal">9 / 36 cells</p>
+          <p class="cb-note">Each cell is measured, matched to its crop profile and treated on its own result.</p>
+          <div class="field-wrap" style="margin-top:1rem;padding:.7rem;border:0;background:transparent">
+            <div class="field-grid" data-field data-cols="6" data-rows="6" data-pattern="mixed" data-treated="A-01,A-03,B-02,B-05,C-04,D-03,E-01,E-05,F-04"></div>
+          </div>
+        </div>
+      </div>
+      <p class="micro" style="margin-top:1rem;color:hsl(var(--muted-foreground)/.6)">Illustrative field model — not measured trial data</p>
+
+      <div class="split-even" style="margin-top:3.5rem">
+        <div class="reveal">
+          <p class="big-stat">33%</p>
+          <p class="body-copy" style="margin-top:.75rem">
+            of the Earth's soils are estimated to be degraded.
+          </p>
+          <p class="micro" style="margin-top:1rem;color:hsl(var(--muted-foreground)/.55)">
+            Source: FAO, Status of the World's Soil Resources (2015)
+          </p>
+        </div>
+        <div class="reveal" style="transition-delay:80ms">
+          <p class="big-stat data-tone">~50%</p>
+          <p class="body-copy" style="margin-top:.75rem">
+            average nitrogen use efficiency in global cropping systems — roughly half of
+            applied nitrogen is not taken up by the crop.
+          </p>
+          <p class="micro" style="margin-top:1rem;color:hsl(var(--muted-foreground)/.55)">
+            Source: Zhang et al., Nature (2015)
+          </p>
+        </div>
+      </div>
+      <p class="note">
+        These are external reference figures used to frame the problem. The prototype has not
+        demonstrated measured yield or runoff improvements, and this site makes no such claim.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================= SOLUTION -->
+  <section class="section" id="solution">
+    <div class="container-x">
+      <div class="section-head reveal">
+        <p class="kicker"><span class="idx">03</span><span class="rule"></span>The solution</p>
+        <h2 class="display">
+          A closed loop that begins
+          <span class="serif-accent" style="display:block;color:hsl(var(--signal))">at the root zone.</span>
+        </h2>
+        <p class="lead">
+          The rover is not a sprayer on wheels. It is an integrated sensing-to-action system:
+          one local decision made per cell, with the whole mission reported to the farmer
+          as it happens.
+        </p>
+      </div>
+
+      <div class="card-soft reveal" style="margin-top:2.5rem;display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:1rem;">
+        <p class="micro">Operating principle</p>
+        <p class="display-sm" style="font-size:1rem;color:hsl(var(--foreground)/.9)">
+          Sense locally. Decide intelligently. Act only when needed.
+        </p>
+        <p class="micro" style="color:hsl(var(--signal)/.8)">Edge decisions stay on the rover</p>
+      </div>
+
+      <div class="grid-cards" style="margin-top:.75rem;grid-template-columns:1fr;">
+        <div style="display:grid;gap:.75rem" class="reveal">
+          <div class="grid-cards" style="gap:.75rem">
+            <article class="card">
+              <p class="card-num">01</p>
+              <h3>Navigate</h3>
+              <p>The rover follows a predefined serpentine grid, holding a straight line with IMU feedback until it reaches the next sampling cell.</p>
+              <p class="micro" style="margin-top:.9rem;color:hsl(var(--data)/.85)">IMU · PD correction</p>
+            </article>
+            <article class="card">
+              <p class="card-num">02</p>
+              <h3>Probe</h3>
+              <p>A servo-controlled arm lowers the soil sensor into the root zone, holds position for a stable reading, then retracts.</p>
+              <p class="micro" style="margin-top:.9rem;color:hsl(var(--data)/.85)">Servo · RS485 Modbus</p>
+            </article>
+            <article class="card">
+              <p class="card-num">03</p>
+              <h3>Decide</h3>
+              <p>The Arduino compares the reading against the thresholds of the crop assigned to that cell — not against a field-wide average.</p>
+              <p class="micro" style="margin-top:.9rem;color:hsl(var(--data)/.85)">Local edge logic</p>
+            </article>
+            <article class="card">
+              <p class="card-num">04</p>
+              <h3>Act</h3>
+              <p>The onboard sprayer activates only when a required nutrient is below its minimum. Otherwise the rover moves on.</p>
+              <p class="micro" style="margin-top:.9rem;color:hsl(var(--data)/.85)">Conditional output</p>
+            </article>
+          </div>
+        </div>
+      </div>
+
+      <!-- pipeline -->
+      <div class="pipeline reveal" style="margin-top:2.5rem">
+        <div class="field-head">
+          <p class="micro" style="color:hsl(var(--signal))">Decision loop — Arduino UNO R3</p>
+          <p class="micro">Telemetry lane — ESP32</p>
+        </div>
+
+        <div class="pipe-flow">
+          <div class="pipe-node">
+            <p class="pn-step">01 · Field cell</p>
+            <p class="pn-title">Serpentine grid halt</p>
+            <p class="pn-note">Position repeatable before probing</p>
+          </div>
+          <div class="pipe-node">
+            <p class="pn-step">02 · RS485 probe</p>
+            <p class="pn-title">6-in-1 soil reading</p>
+            <p class="pn-note">Modbus RTU · moisture · pH · N · P · K · temp</p>
+          </div>
+          <div class="pipe-node is-accent">
+            <p class="pn-step">03 · Arduino UNO R3</p>
+            <p class="pn-title">Compare to crop profile</p>
+            <p class="pn-note">N · P · K against configured minimums</p>
+          </div>
+          <div class="pipe-node">
+            <p class="pn-step">04 · Sprayer</p>
+            <p class="pn-title">Fires only on deficiency</p>
+            <p class="pn-note">if reading &lt; minimum · else no action</p>
+          </div>
+        </div>
+
+        <div class="telemetry-lane">
+          <div class="tel-step">
+            <p class="ts-t">Arduino → ESP32</p>
+            <p class="ts-n">serial link · mission state</p>
+          </div>
+          <div class="tel-step">
+            <p class="ts-t">Blynk cloud</p>
+            <p class="ts-n">datastreams · V-pins</p>
+          </div>
+          <div class="tel-step">
+            <p class="ts-t">Farmer dashboard</p>
+            <p class="ts-n">phone · browser</p>
+          </div>
+        </div>
+        <p class="arch-note">Optional NEO-M8N · logging only — not live navigation</p>
+      </div>
+
+      <!-- next pages -->
+      <div class="reveal" style="margin-top:4.5rem">
+        <div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:1rem">
+          <h2 class="display-sm">Continue through the project</h2>
+          <p class="micro">Four pages · one system</p>
+        </div>
+        <div class="next-grid">
+          <a class="next-card" href="technology.html">
+            <span class="nc-num">02</span>
+            <span class="nc-title">Technology</span>
+            <span class="nc-desc">Operating modes, per-cell decisions, crop profiles, architecture and hardware.</span>
+            <svg class="nc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </a>
+          <a class="next-card" href="autonomy.html">
+            <span class="nc-num">03</span>
+            <span class="nc-title">Autonomy</span>
+            <span class="nc-desc">Navigation without GPS, and the telemetry the farmer sees during a mission.</span>
+            <svg class="nc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </a>
+          <a class="next-card" href="impact.html">
+            <span class="nc-num">04</span>
+            <span class="nc-title">Impact</span>
+            <span class="nc-desc">What the prototype demonstrates, what it should deliver, and what still needs trials.</span>
+            <svg class="nc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================== CLOSING -->
+  <section class="closing" id="closing" style="padding-top:1.5rem">
+    <div class="closing-card">
+      <div class="closing-bg" style="background-image:url('assets/img/rover-dusk.jpg')"></div>
+      <div class="closing-tint"></div>
+      <div class="closing-body">
+        <p class="closing-badge">13 · Project identity</p>
+        <h2 class="display">
+          Engineering precision for the
+          <span class="serif-accent signal">fields of tomorrow.</span>
+        </h2>
+        <p class="lead">
+          Built for the EduStream / WSRO Fibonacci 2026 international competition. Designed
+          around practical agricultural challenges, embedded intelligence and precision
+          nutrient management.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="index.html">
+            Back to the opening
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
+          </a>
+          <button class="btn btn-ghost" data-presentation aria-pressed="false">
+            <span class="presentation-label">Presentation mode</span>
+          </button>
+        </div>
+        <div class="facts" style="margin-top:2.5rem">
+          <div>
+            <p class="f-k">Project</p>
+            <p class="f-v" style="font-size:.85rem;margin-top:.35rem">Fibonacci 2026 Autonomous Smart Farming Rover</p>
+          </div>
+          <div>
+            <p class="f-k">Competition</p>
+            <p class="f-v" style="font-size:.85rem;margin-top:.35rem">EduStream / WSRO · Fibonacci International</p>
+          </div>
+          <div>
+            <p class="f-k">Edition</p>
+            <p class="f-v" style="font-size:.85rem;margin-top:.35rem">Italy · 2026</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container-x">
+    <div class="footer-grid">
+      <div>
+        <p class="footer-brand">Fibonacci 2026</p>
+        <p class="footer-sub">Autonomous smart farming rover</p>
+        <p class="footer-copy">
+          A sense-to-decide-to-act agricultural system built for the EduStream / WSRO Fibonacci
+          international competition. Prototype documentation — all interface data shown on this
+          site is illustrative.
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>Pages</h4>
+        <nav class="footer-links" aria-label="Pages">
+          <a href="index.html">Overview <span>01</span></a>
+          <a href="technology.html">Technology <span>02</span></a>
+          <a href="autonomy.html">Autonomy <span>03</span></a>
+          <a href="impact.html">Impact <span>04</span></a>
+        </nav>
+      </div>
+      <div class="footer-col">
+        <h4>Project</h4>
+        <p class="micro" style="line-height:2;color:hsl(var(--muted-foreground)/.8)">
+          Fibonacci 2026 · Italy · Prototype build
+        </p>
+        <button class="to-top micro" data-to-top style="margin-top:1rem;letter-spacing:.14em">
+          Back to top
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Fibonacci 2026</span>
+      <p class="disclaimer">
+        No team members, sponsors or trial results are listed — only the delivered prototype is described.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

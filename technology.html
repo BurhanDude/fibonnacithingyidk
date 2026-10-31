@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Technology — Fibonacci 2026</title>
+<meta name="description" content="Four operating modes, one decision engine, and the hardware that carries the decision from soil to dashboard." />
+<meta name="theme-color" content="#05070A" />
+<link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+<link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span> Fibonacci 2026</a>
+    <div class="header-actions">
+      <button class="icon-btn wide" data-presentation aria-pressed="false" title="Toggle presentation mode">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+        <span class="presentation-label presentation-hide">Present</span>
+      </button>
+      <button class="icon-btn" data-menu-open aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="site-menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="brand"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span> Fibonacci 2026</span>
+    <button class="icon-btn" data-menu-close aria-label="Close menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <div class="menu-body">
+    <nav class="menu-list" aria-label="Pages">
+      <a class="menu-item" href="index.html">
+        <span class="num">01</span><span class="name">Overview</span>
+        <span class="desc">The agricultural problem, the system that answers it, and the principle behind it.</span>
+      </a>
+      <a class="menu-item is-current" href="technology.html">
+        <span class="num">02</span><span class="name">Technology</span>
+        <span class="desc">Operating modes, per-cell decisions, crop profiles, architecture and hardware.</span>
+      </a>
+      <a class="menu-item" href="autonomy.html">
+        <span class="num">03</span><span class="name">Autonomy</span>
+        <span class="desc">Navigation without GPS, and the telemetry the farmer sees during a mission.</span>
+      </a>
+      <a class="menu-item" href="impact.html">
+        <span class="num">04</span><span class="name">Impact</span>
+        <span class="desc">What the prototype demonstrates, what it should deliver, and what still needs trials.</span>
+      </a>
+    </nav>
+    <aside class="menu-aside">
+      <div>
+        <h4>On this page</h4>
+        <ul>
+          <li><a href="#modes">04 · Operating modes</a></li>
+          <li><a href="#waste">05 · Per-cell decisions</a></li>
+          <li><a href="#architecture">06 · System architecture</a></li>
+          <li><a href="#crops">07 · Crop intelligence</a></li>
+          <li><a href="#hardware">10 · Hardware &amp; engineering</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Elsewhere</h4>
+        <ul>
+          <li><a href="autonomy.html#navigation">Navigation</a></li>
+          <li><a href="autonomy.html#dashboard">Farmer dashboard</a></li>
+          <li><a href="impact.html#roadmap">Roadmap</a></li>
+        </ul>
+      </div>
+      <p class="micro" style="line-height:1.9;color:hsl(var(--muted-foreground)/.65)">
+        EduStream / WSRO · Fibonacci International Competition · Italy 2026
+      </p>
+    </aside>
+  </div>
+</div>
+
+<main>
+
+  <!-- ================================================================= HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="container-x">
+      <p class="hero-badge"><span class="dot" aria-hidden="true"></span> 02 <span class="sep">·</span> Technology</p>
+      <h1>
+        Four modes, one decision engine,
+        <span class="serif-accent">built from parts you can service.</span>
+      </h1>
+      <p class="lead">
+        How the rover assigns a crop to every cell, decides whether to treat, and which
+        hardware carries the decision from soil to dashboard.
+      </p>
+      <div class="chips">
+        <span class="chip">Arduino UNO R3</span>
+        <span class="chip">ESP32</span>
+        <span class="chip">RS485 Modbus</span>
+        <span class="chip">BNO085 IMU</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================ MODES -->
+  <section class="section" id="modes">
+    <div class="container-x">
+      <div class="section-head reveal">
+        <p class="kicker"><span class="idx">04</span><span class="rule"></span>Intelligent operating modes</p>
+        <h2 class="display">
+          Four field configurations.
+          <span class="serif-accent" style="display:block;color:hsl(var(--signal))">One decision engine.</span>
+        </h2>
+        <p class="lead">
+          A real field is rarely one crop in one pattern. The rover resolves a crop profile
+          from the grid coordinate it is standing on, using whichever assignment the farmer
+          selected for that mission.
+        </p>
+      </div>
+
+      <div class="tabs reveal" role="tablist" aria-label="Operating modes" data-tabs="modes">
+        <button class="tab" role="tab" aria-selected="true" aria-controls="mode-m1" data-tab="m1">
+          <span class="t-num">M1</span><span class="t-name">Plain Field</span><span class="t-note">A · A · A · A</span>
+        </button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="mode-m2" data-tab="m2" tabindex="-1">
+          <span class="t-num">M2</span><span class="t-name">1:1 Intercrop</span><span class="t-note">A · B · A · B</span>
+        </button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="mode-m3" data-tab="m3" tabindex="-1">
+          <span class="t-num">M3</span><span class="t-name">2:2 Advanced Intercrop</span><span class="t-note">A · A · B · B</span>
+        </button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="mode-m4" data-tab="m4" tabindex="-1">
+          <span class="t-num">M4</span><span class="t-name">Custom Coordinates</span><span class="t-note">Farmer-defined points</span>
+        </button>
+      </div>
+
+      <!-- M1 -->
+      <div class="panel is-active" id="mode-m1" role="tabpanel" data-panel="modes:m1" style="margin-top:1.75rem">
+        <div class="split">
+          <div>
+            <h3 class="display-sm">Plain Field</h3>
+            <p class="body-copy" style="margin-top:.75rem">One crop profile applied across every cell of the field.</p>
+            <p class="body-copy" style="margin-top:.9rem">
+              The field is treated as a single crop block. Every sampling location uses the same
+              threshold set, so the rover behaves like a conventional precision probe — but still
+              stops and measures each cell instead of assuming the field is uniform.
+            </p>
+            <dl class="dl" style="margin-top:1.5rem">
+              <div><dt>Assignment pattern</dt><dd>A · A · A · A</dd></div>
+              <div><dt>Practical application</dt><dd>Monoculture blocks, variety trials, or a first season on a field where one crop dominates and the farmer wants a baseline soil map.</dd></div>
+            </dl>
+          </div>
+          <div class="field-wrap">
+            <div class="field-head">
+              <p class="micro">Field map · <span style="color:hsl(var(--foreground))">6</span> × <span style="color:hsl(var(--foreground))">6</span></p>
+              <p class="micro">Hover a cell</p>
+            </div>
+            <div class="field-grid" data-field data-cols="6" data-rows="6" data-pattern="plain"></div>
+            <div class="field-legend">
+              <span class="legend-item"><span class="legend-swatch a"></span>A · Maize</span>
+              <span class="legend-item"><span class="legend-swatch b"></span>B · Bean</span>
+              <span class="legend-item"><span class="legend-swatch c"></span>C · Tomato</span>
+            </div>
+          </div>
+        </div>
+        <p class="body-copy" style="margin-top:1.5rem;max-width:38rem">
+          Grid coordinates are how the rover knows which crop profile applies before it evaluates a reading.
+        </p>
+        <p class="note">Field maps are illustrative. Up to three crop profiles can be configured per mission.</p>
+      </div>
+
+      <!-- M2 -->
+      <div class="panel" id="mode-m2" role="tabpanel" data-panel="modes:m2" style="margin-top:1.75rem">
+        <div class="split">
+          <div>
+            <h3 class="display-sm">1:1 Intercrop</h3>
+            <p class="body-copy" style="margin-top:.75rem">Two crops alternating column by column across the field.</p>
+            <p class="body-copy" style="margin-top:.9rem">
+              Every other column carries the second crop. The rover still traverses the same
+              serpentine grid, but the profile it evaluates against changes as it crosses from
+              one column to the next.
+            </p>
+            <dl class="dl" style="margin-top:1.5rem">
+              <div><dt>Assignment pattern</dt><dd>A · B · A · B</dd></div>
+              <div><dt>Practical application</dt><dd>Strip intercropping of a cereal with a legume, where the legume's lower nitrogen demand sits directly beside the cereal's higher one.</dd></div>
+            </dl>
+          </div>
+          <div class="field-wrap">
+            <div class="field-head">
+              <p class="micro">Field map · <span style="color:hsl(var(--foreground))">6</span> × <span style="color:hsl(var(--foreground))">6</span></p>
+              <p class="micro">Hover a cell</p>
+            </div>
+            <div class="field-grid" data-field data-cols="6" data-rows="6" data-pattern="intercrop"></div>
+            <div class="field-legend">
+              <span class="legend-item"><span class="legend-swatch a"></span>A · Maize</span>
+              <span class="legend-item"><span class="legend-swatch b"></span>B · Bean</span>
+            </div>
+          </div>
+        </div>
+        <p class="note">Field maps are illustrative. Up to three crop profiles can be configured per mission.</p>
+      </div>
+
+      <!-- M3 -->
+      <div class="panel" id="mode-m3" role="tabpanel" data-panel="modes:m3" style="margin-top:1.75rem">
+        <div class="split">
+          <div>
+            <h3 class="display-sm">2:2 Advanced Intercrop</h3>
+            <p class="body-copy" style="margin-top:.75rem">Two crop columns, then two of the other, repeating across the field.</p>
+            <p class="body-copy" style="margin-top:.9rem">
+              Wider strips give machinery room to move while keeping two requirement sets
+              active in the same mission. Each strip keeps its own profile, so a treatment
+              boundary follows the crop boundary rather than the field edge.
+            </p>
+            <dl class="dl" style="margin-top:1.5rem">
+              <div><dt>Assignment pattern</dt><dd>A · A · B · B</dd></div>
+              <div><dt>Practical application</dt><dd>Paired-row systems where two rows of each crop are planted together to simplify passes without losing crop-specific thresholds.</dd></div>
+            </dl>
+          </div>
+          <div class="field-wrap">
+            <div class="field-head">
+              <p class="micro">Field map · <span style="color:hsl(var(--foreground))">6</span> × <span style="color:hsl(var(--foreground))">6</span></p>
+              <p class="micro">Hover a cell</p>
+            </div>
+            <div class="field-grid" data-field data-cols="6" data-rows="6" data-pattern="advanced"></div>
+            <div class="field-legend">
+              <span class="legend-item"><span class="legend-swatch a"></span>A · Maize</span>
+              <span class="legend-item"><span class="legend-swatch b"></span>B · Bean</span>
+            </div>
+          </div>
+        </div>
+        <p class="note">Field maps are illustrative. Up to three crop profiles can be configured per mission.</p>
+      </div>
+
+      <!-- M4 -->
+      <div class="panel" id="mode-m4" role="tabpanel" data-panel="modes:m4" style="margin-top:1.75rem">
+        <div class="split">
+          <div>
+            <h3 class="display-sm">Custom Coordinates</h3>
+            <p class="body-copy" style="margin-top:.75rem">The farmer defines which points are sampled and which crop applies at each one.</p>
+            <p class="body-copy" style="margin-top:.9rem">
+              For irregular plantings, trial plots or a field where crops were changed mid-season,
+              a coordinate list replaces the repeating pattern. Each defined point carries its
+              own profile assignment.
+            </p>
+            <dl class="dl" style="margin-top:1.5rem">
+              <div><dt>Assignment pattern</dt><dd>Farmer-defined points</dd></div>
+              <div><dt>Practical application</dt><dd>Research plots, nursery beds and irregular intercropping where no repeating pattern describes the field.</dd></div>
+            </dl>
+          </div>
+          <div class="field-wrap">
+            <div class="field-head">
+              <p class="micro">Field map · <span style="color:hsl(var(--foreground))">6</span> × <span style="color:hsl(var(--foreground))">6</span></p>
+              <p class="micro">Hover a cell</p>
+            </div>
+            <div class="field-grid" data-field data-cols="6" data-rows="6" data-pattern="mixed"></div>
+            <div class="field-legend">
+              <span class="legend-item"><span class="legend-swatch a"></span>A · Maize</span>
+              <span class="legend-item"><span class="legend-swatch b"></span>B · Bean</span>
+              <span class="legend-item"><span class="legend-swatch c"></span>C · Tomato</span>
+            </div>
+          </div>
+        </div>
+        <p class="note">Field maps are illustrative. Up to three crop profiles can be configured per mission.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================ WASTE -->
+  <section class="section" id="waste">
+    <div class="container-x">
+      <div class="section-head reveal">
+        <p class="kicker"><span class="idx">05</span><span class="rule"></span>How the rover prevents waste</p>
+        <h2 class="display">
+          The same reading can mean
+          <span class="serif-accent" style="display:block;color:hsl(var(--signal))">two different decisions.</span>
+        </h2>
+        <p class="lead">
+          Nutrient demand is crop-specific. A nitrogen reading that starves maize is sufficient
+          for a legume in the next column. The rover holds that difference in software instead
+          of averaging it away.
+        </p>
+      </div>
+
+      <div class="split-even" style="margin-top:2.5rem">
+        <div class="reveal">
+          <p class="micro">Per-cell decision sequence</p>
+          <ol class="num-list" style="margin-top:.75rem">
+            <li><span>01</span><span>Measure the actual root-zone soil condition at that cell.</span></li>
+            <li><span>02</span><span>Identify which crop occupies the cell from its grid coordinate.</span></li>
+            <li><span>03</span><span>Retrieve that crop profile's configured minimum thresholds.</span></li>
+            <li><span>04</span><span>Compare the measured nutrient levels against those minimums.</span></li>
+            <li><span>05</span><span>Activate the sprayer only where a required nutrient falls below its threshold.</span></li>
+          </ol>
+        </div>
+        <div class="reveal" style="transition-delay:80ms">
+          <div class="card-soft">
+            <p class="micro">Scope of intervention</p>
+            <p class="body-copy" style="margin-top:.85rem">
+              The rover performs precision <span style="color:hsl(var(--signal))">nutrient</span> application.
+              It does not control the field's irrigation infrastructure. Zone-aware logic identifies
+              sprinkler and infrastructure cells so they are excluded from inappropriate treatment —
+              the same coordinate layer could support targeted irrigation in future work.
+            </p>
+            <p class="note">Fertilizer reduction is not presented as a water saving. Any water benefit would require separate measurement.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- treatment log -->
+      <div class="reveal" style="margin-top:3rem">
+        <div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:1rem;margin-bottom:.9rem">
+          <p class="micro" style="color:hsl(var(--signal))">Illustrative treatment log</p>
+          <p class="micro">Sample values</p>
+        </div>
+        <div style="display:grid;gap:.5rem">
+          <div class="treat-row">
+            <div>
+              <p class="tr-cell">A-02<span class="tr-crop" style="margin-left:.5rem">/ Maize</span></p>
+            </div>
+            <div>
+              <p class="tr-body">Below minimum — sprayer armed for this cell.</p>
+            </div>
+            <div style="display:flex;align-items:center;gap:1rem">
+              <div class="tr-values">Nitrogen <b>24</b> mg/kg <span>· min</span> <b>40</b></div>
+              <span class="pill-status spray">Spray</span>
+            </div>
+          </div>
+          <div class="treat-row">
+            <div>
+              <p class="tr-cell">A-03<span class="tr-crop" style="margin-left:.5rem">/ Maize</span></p>
+            </div>
+            <div>
+              <p class="tr-body">Above minimum — cell left untouched.</p>
+            </div>
+            <div style="display:flex;align-items:center;gap:1rem">
+              <div class="tr-values">Nitrogen <b>44</b> mg/kg <span>· min</span> <b>40</b></div>
+              <span class="pill-status ok">No action</span>
+            </div>
+          </div>
+          <div class="treat-row">
+            <div>
+              <p class="tr-cell">B-04<span class="tr-crop" style="margin-left:.5rem">/ Bean</span></p>
+            </div>
+            <div>
+              <p class="tr-body">Same reading, different crop — no deficiency for the bean profile.</p>
+            </div>
+            <div style="display:flex;align-items:center;gap:1rem">
+              <div class="tr-values">Nitrogen <b>24</b> mg/kg <span>· min</span> <b>18</b></div>
+              <span class="pill-status ok">No action</span>
+            </div>
+          </div>
+        </div>
+        <p class="note">Thresholds are user-configured per crop profile. Values shown are illustrative, not trial results.</p>
+      </div>
+
+      <!-- after one mission -->
+      <div class="reveal" style="margin-top:3rem">
+        <div class="card-soft">
+          <div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:1rem">
+            <p class="micro" style="color:hsl(var(--signal))">Same field · after one mission</p>
+            <div class="facts" style="border:0;padding:0;gap:1.5rem;flex:0 0 auto">
+              <div><p class="f-v signal">08</p><p class="f-k">Treated · deficit confirmed</p></div>
+              <div><p class="f-v">26</p><p class="f-k">Untouched · no action</p></div>
+              <div><p class="f-v data-tone">02</p><p class="f-k">Excluded · sprinkler zone</p></div>
+            </div>
+          </div>
+          <p class="body-copy" style="margin-top:1rem;max-width:44rem">
+            <span style="color:hsl(var(--foreground))">Before:</span> every cell received the same blanket pass.
+            <span style="color:hsl(var(--signal))">After:</span> only cells with a confirmed deficit were treated,
+            and the two irrigation-infrastructure cells were excluded by zone logic.
+          </p>
+          <div class="field-grid" style="margin-top:1.25rem;max-width:30rem" data-field data-cols="6" data-rows="6" data-pattern="intercrop" data-treated="A-02,B-03,A-04,B-05,C-02,D-03,E-04,F-05,A-06,B-01" data-excluded="C-05,D-06"></div>
+          <div class="field-legend">
+            <span class="legend-item"><span class="legend-swatch treated"></span>Treated</span>
+            <span class="legend-item"><span class="legend-swatch untouched"></span>Untouched</span>
+            <span class="legend-item"><span class="legend-swatch b"></span>Excluded · sprinkler</span>
+          </div>
+          <p class="micro" style="margin-top:1rem;color:hsl(var(--muted-foreground)/.6)">Illustrative field model — not a measured trial result</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================= ARCHITECTURE -->
+  <section class="section" id="architecture">
+    <div class="container-x">
+      <div class="section-head reveal">
+        <p class="kicker"><span class="idx">06</span><span class="rule"></span>System architecture</p>
+        <h2 class="display">
+          Two controllers,
+          <span class="serif-accent" style="display:block;color:hsl(var(--signal))">one clean division of labour.</span>
+        </h2>
+        <p class="lead">
+          Motion and sensing run on the Arduino UNO R3, where timing matters. Connectivity runs
+          on the ESP32, where a dropped packet matters less than a missed motor step. Neither
+          task can stall the other.
+        </p>
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:.75rem;margin-top:2rem" data-highlight-group>
+        <p class="micro" style="letter-spacing:.18em">Highlight</p>
+        <button class="tab" data-highlight="arduino" aria-pressed="true">
+          <span class="t-name">Arduino UNO R3 · Edge control</span>
+        </button>
+        <button class="tab" data-highlight="esp32" aria-pressed="false">
+          <span class="t-name">ESP32 · Connectivity</span>
+        </button>
+      </div>
+
+      <div class="arch reveal" style="margin-top:1rem">
+        <div class="arch-board">
+          <div class="arch-unit is-lit" data-lit="arduino">
+            <p class="au-kicker">Motion · sensing · local decision</p>
+            <p class="au-title">Arduino UNO R3 — edge control</p>
+            <p class="au-sub">crop-profile comparison</p>
+            <div class="periph">
+              <div class="periph-item"><p class="pi-name">BNO085 IMU</p><p class="pi-note">9-DOF heading</p></div>
+              <div class="periph-item"><p class="pi-name">Probe servo</p><p class="pi-note">deploy / hold</p></div>
+              <div class="periph-item"><p class="pi-name">N20 motors</p><p class="pi-note">via motor driver</p></div>
+              <div class="periph-item"><p class="pi-name">DHT11</p><p class="pi-note">air temp · RH</p></div>
+              <div class="periph-item"><p class="pi-name">RS485 6-in-1 probe</p><p class="pi-note">soil via MAX485</p></div>
+              <div class="periph-item"><p class="pi-name">Sprayer</p><p class="pi-note">relay + nozzle</p></div>
+            </div>
+          </div>
+
+          <div class="arch-link" aria-hidden="true">
+            <span class="al-line"></span>
+            <span class="al-label">UART / serial · mission state</span>
+            <span class="al-line"></span>
+          </div>
+
+          <div class="arch-unit" data-lit="esp32">
+            <p class="au-kicker">Wi-Fi · Blynk · telemetry</p>
+            <p class="au-title">ESP32 — connectivity</p>
+            <p class="au-sub">datastreams · V-pins</p>
+            <div class="periph">
+              <div class="periph-item"><p class="pi-name">Wi-Fi</p><p class="pi-note">2.4 GHz</p></div>
+              <div class="periph-item"><p class="pi-name">Blynk cloud</p><p class="pi-note">virtual pins</p></div>
+              <div class="periph-item"><p class="pi-name">Farmer dashboard</p><p class="pi-note">phone · browser</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="arch-remote">
+          <div class="remote-node"><p class="rn-t">Blynk Cloud</p><p class="rn-n">datastreams · V-pins</p></div>
+          <div class="remote-node"><p class="rn-t">Farmer dashboard</p><p class="rn-n">phone · browser</p></div>
+          <div class="remote-node"><p class="rn-t">Optional NEO-M8N GPS</p><p class="rn-n">position logging only — navigation stays IMU-based</p></div>
+        </div>
+        <p class="arch-note">Soil sensor data reaches the Arduino through MAX485 RS485 conversion.</p>
+      </div>
+
+      <!-- component register -->
+      <div class="reveal" style="margin-top:3rem">
+        <p class="micro" style="letter-spacing:.18em">Component register</p>
+        <div class="grid-cards" style="margin-top:1rem">
+          <article class="card">
+            <p class="card-num">BNO085 9-DOF IMU</p>
+            <h3 class="micro-lg" style="font-size:.56rem;letter-spacing:.14em;color:hsl(var(--data)/.9);margin-top:.5rem">Heading reference</h3>
+            <p>Provides orientation feedback so straight-line travel and 90° turns do not depend on GPS.</p>
+          </article>
+          <article class="card">
+            <p class="card-num">RS485 6-in-1 soil sensor</p>
+            <h3 class="micro-lg" style="font-size:.56rem;letter-spacing:.14em;color:hsl(var(--data)/.9);margin-top:.5rem">Root-zone sensing</h3>
+            <p>One probe reports moisture, temperature, pH, nitrogen, phosphorus and potassium over a noise-resistant industrial bus.</p>
+          </article>
+          <article class="card">
+            <p class="card-num">MAX485 interface</p>
+            <h3 class="micro-lg" style="font-size:.56rem;letter-spacing:.14em;color:hsl(var(--data)/.9);margin-top:.5rem">Bus conversion</h3>
+            <p>Translates the sensor's RS485 differential signalling to the Arduino's serial pins.</p>
+          </article>
+          <article class="card">
+            <p class="card-num">DHT11 sensor</p>
+            <h3 class="micro-lg" style="font-size:.56rem;letter-spacing:.14em;color:hsl(var(--data)/.9);margin-top:.5rem">Ambient context</h3>
+            <p>Air temperature and humidity sit alongside soil data in the telemetry record.</p>
+          </article>
+          <article class="card">
+            <p class="card-num">Servo-controlled probe</p>
+            <h3 class="micro-lg" style="font-size:.56rem;letter-spacing:.14em;color:hsl(var(--data)/.9);margin-top:.5rem">Deployment</h3>
+            <p>Drives the sensor to a repeatable depth instead of relying on the operator's hand.</p>
+          </article>
+          <article class="card">
+            <p class="card-num">N20 geared motors</p>
+            <h3 class="micro-lg" style="font-size:.56rem;letter-spacing:.14em;color:hsl(var(--data)/.9);margin-top:.5rem">Traction</h3>
+            <p>Compact, high-torque drives matched to slow, precise row-speed movement.</p>
+          </article>
+          <article class="card">
+            <p class="card-num">Motor driver</p>
+            <h3 class="micro-lg" style="font-size:.56rem;letter-spacing:.14em;color:hsl(var(--data)/.9);margin-top:.5rem">Actuation</h3>
+            <p>Gives the Arduino independent, direction-controlled drive for each side.</p>
+          </article>
+          <article class="card">
+            <p class="card-num">Onboard sprayer</p>
+            <h3 class="micro-lg" style="font-size:.56rem;letter-spacing:.14em;color:hsl(var(--data)/.9);margin-top:.5rem">Nutrient delivery</h3>
+            <p>A relay-switched pump and nozzle allow a treatment to be applied at the moment of decision.</p>
+          </article>
+          <article class="card">
+            <p class="card-num">ESP32</p>
+            <h3 class="micro-lg" style="font-size:.56rem;letter-spacing:.14em;color:hsl(var(--data)/.9);margin-top:.5rem">Connectivity</h3>
+            <p>Offloads Wi-Fi, Blynk and telemetry from the motion controller so loop timing is unaffected.</p>
+          </article>
+          <article class="card">
+            <p class="card-num">NEO-M8N GPS</p>
+            <h3 class="micro-lg" style="font-size:.56rem;letter-spacing:.14em;color:hsl(var(--data)/.9);margin-top:.5rem">Optional logging</h3>
+            <p>Records position for mapping and review. It is not used for live navigation.</p>
+          </article>
+        </div>
+      </div>
+
+      <div class="reveal" style="margin-top:2.5rem">
+        <p class="micro" style="letter-spacing:.18em">Acronyms</p>
+        <dl class="dl" style="margin-top:.75rem">
+          <div><dt>IMU</dt><dd>Inertial Measurement Unit — measures orientation and rotation.</dd></div>
+          <div><dt>RS485</dt><dd>Industrial two-wire serial bus, tolerant of electrical noise over longer cable runs.</dd></div>
+          <div><dt>Modbus RTU</dt><dd>A serial protocol used to request and receive registers from sensors.</dd></div>
+          <div><dt>UART</dt><dd>Universal Asynchronous Receiver-Transmitter — simple serial link between the two controllers.</dd></div>
+          <div><dt>PWM</dt><dd>Pulse Width Modulation — how motor and servo speed is commanded.</dd></div>
+          <div><dt>I2C</dt><dd>Inter-Integrated Circuit — short-range two-wire sensor bus.</dd></div>
+          <div><dt>GPS</dt><dd>Global Positioning System — used here only for optional position logging.</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================ CROPS -->
+  <section class="section" id="crops">
+    <div class="container-x">
+      <div class="section-head reveal">
+        <p class="kicker"><span class="idx">07</span><span class="rule"></span>Crop intelligence</p>
+        <h2 class="display">
+          Thresholds set by the farmer.
+          <span class="serif-accent" style="display:block;color:hsl(var(--signal))">Judgement left to nobody.</span>
+        </h2>
+        <p class="lead">
+          Up to three crop profiles can be configured per mission. Each carries the crop's name
+          and minimum values for moisture, pH, nitrogen, phosphorus and potassium. At every cell,
+          the rover loads the matching profile and evaluates the reading against it.
+        </p>
+      </div>
+
+      <div class="tabs reveal" role="tablist" aria-label="Crop profiles" data-tabs="crops">
+        <button class="tab" role="tab" aria-selected="true" aria-controls="profile-p1" data-tab="p1">
+          <span class="t-num">P1</span><span class="t-name">Tomato</span><span class="t-note">N 30 · P 20 · K 40</span>
+        </button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="profile-p2" data-tab="p2" tabindex="-1">
+          <span class="t-num">P2</span><span class="t-name">Maize</span><span class="t-note">N 40 · P 18 · K 35</span>
+        </button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="profile-p3" data-tab="p3" tabindex="-1">
+          <span class="t-num">P3</span><span class="t-name">Bean</span><span class="t-note">N 18 · P 15 · K 25</span>
+        </button>
+      </div>
+
+      <!-- P1 -->
+      <div class="panel is-active" id="profile-p1" role="tabpanel" data-panel="crops:p1" style="margin-top:1.75rem">
+        <div class="split">
+          <div class="profile">
+            <div class="profile-head">
+              <p class="micro">Profile <span style="color:hsl(var(--signal))">P1</span> · Tomato</p>
+              <p class="micro">Sample readings</p>
+            </div>
+            <p class="body-copy" style="margin-top:.9rem">Heavy feeding, sensitive to moisture swings in the root zone.</p>
+
+            <div class="nutrient">
+              <div class="nutrient-head">
+                <p class="nutrient-name"><b>N</b> · Nitrogen</p>
+                <p class="nutrient-state low">Below minimum</p>
+              </div>
+              <div class="bar"><span class="bar-fill low" style="width:80%"></span><span class="bar-mark" style="left:88%"></span></div>
+              <div class="bar-legend"><span>24 / min 30</span><span>mg/kg</span></div>
+            </div>
+            <div class="nutrient">
+              <div class="nutrient-head">
+                <p class="nutrient-name"><b>P</b> · Phosphorus</p>
+                <p class="nutrient-state ok">Sufficient</p>
+              </div>
+              <div class="bar"><span class="bar-fill ok" style="width:88%"></span><span class="bar-mark" style="left:72%"></span></div>
+              <div class="bar-legend"><span>22 / min 20</span><span>mg/kg</span></div>
+            </div>
+            <div class="nutrient">
+              <div class="nutrient-head">
+                <p class="nutrient-name"><b>K</b> · Potassium</p>
+                <p class="nutrient-state ok">Sufficient</p>
+              </div>
+              <div class="bar"><span class="bar-fill ok" style="width:92%"></span><span class="bar-mark" style="left:76%"></span></div>
+              <div class="bar-legend"><span>46 / min 40</span><span>mg/kg</span></div>
+            </div>
+            <div class="split-even" style="gap:1rem;margin-top:1rem">
+              <div>
+                <p class="micro">Soil moisture · monitored</p>
+                <p style="font-family:var(--font-mono);font-size:1.05rem;margin-top:.3rem">27<small style="font-size:.6rem;color:hsl(var(--muted-foreground))"> % / min 35 %</small></p>
+                <p class="micro" style="margin-top:.3rem;color:hsl(var(--amber))">Below range — recorded</p>
+              </div>
+              <div>
+                <p class="micro">Soil pH · monitored</p>
+                <p style="font-family:var(--font-mono);font-size:1.05rem;margin-top:.3rem">6.6<small style="font-size:.6rem;color:hsl(var(--muted-foreground))"> / 6–7</small></p>
+                <p class="micro" style="margin-top:.3rem;color:hsl(var(--data))">Within range</p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="card-soft">
+              <p class="micro">How a profile is used</p>
+              <ol class="num-list" style="margin-top:.5rem">
+                <li><span>01</span><span>Grid coordinate resolves the crop assigned to the cell.</span></li>
+                <li><span>02</span><span>That crop's profile is loaded from the configured set.</span></li>
+                <li><span>03</span><span>Sensor values are compared against its minimums.</span></li>
+                <li><span>04</span><span>Any nutrient below its minimum arms the sprayer.</span></li>
+              </ol>
+            </div>
+            <p class="card-soft" style="margin-top:.75rem">
+              <span class="micro" style="color:hsl(var(--signal))">Decision · </span>
+              <span class="body-copy">1 of 3 nutrient minimums are not met for tomato — the sprayer is activated for this cell.</span>
+            </p>
+            <p class="note">Illustrative values. Moisture and pH are recorded and reported, not sprayed against.</p>
+          </div>
+        </div>
+        <p class="micro" style="margin-top:1.5rem;color:hsl(var(--muted-foreground)/.6);letter-spacing:.06em;text-transform:none">
+          Bar length shows the measured value; the vertical tick marks the configured minimum. All values are illustrative.
+        </p>
+        <p class="note">This is a rule-based threshold system — not machine learning or autonomous agronomic advice.</p>
+      </div>
+
+      <!-- P2 -->
+      <div class="panel" id="profile-p2" role="tabpanel" data-panel="crops:p2" style="margin-top:1.75rem">
+        <div class="split">
+          <div class="profile">
+            <div class="profile-head">
+              <p class="micro">Profile <span style="color:hsl(var(--signal))">P2</span> · Maize</p>
+              <p class="micro">Sample readings</p>
+            </div>
+            <p class="body-copy" style="margin-top:.9rem">High nitrogen demand through vegetative growth.</p>
+            <div class="nutrient">
+              <div class="nutrient-head"><p class="nutrient-name"><b>N</b> · Nitrogen</p><p class="nutrient-state ok">Sufficient</p></div>
+              <div class="bar"><span class="bar-fill ok" style="width:84%"></span><span class="bar-mark" style="left:76%"></span></div>
+              <div class="bar-legend"><span>44 / min 40</span><span>mg/kg</span></div>
+            </div>
+            <div class="nutrient">
+              <div class="nutrient-head"><p class="nutrient-name"><b>P</b> · Phosphorus</p><p class="nutrient-state ok">Sufficient</p></div>
+              <div class="bar"><span class="bar-fill ok" style="width:80%"></span><span class="bar-mark" style="left:68%"></span></div>
+              <div class="bar-legend"><span>21 / min 18</span><span>mg/kg</span></div>
+            </div>
+            <div class="nutrient">
+              <div class="nutrient-head"><p class="nutrient-name"><b>K</b> · Potassium</p><p class="nutrient-state ok">Sufficient</p></div>
+              <div class="bar"><span class="bar-fill ok" style="width:86%"></span><span class="bar-mark" style="left:72%"></span></div>
+              <div class="bar-legend"><span>38 / min 35</span><span>mg/kg</span></div>
+            </div>
+            <div class="split-even" style="gap:1rem;margin-top:1rem">
+              <div>
+                <p class="micro">Soil moisture · monitored</p>
+                <p style="font-family:var(--font-mono);font-size:1.05rem;margin-top:.3rem">31<small style="font-size:.6rem;color:hsl(var(--muted-foreground))"> % / min 32 %</small></p>
+                <p class="micro" style="margin-top:.3rem;color:hsl(var(--data))">At threshold — recorded</p>
+              </div>
+              <div>
+                <p class="micro">Soil pH · monitored</p>
+                <p style="font-family:var(--font-mono);font-size:1.05rem;margin-top:.3rem">6.5<small style="font-size:.6rem;color:hsl(var(--muted-foreground))"> / 5.8–7</small></p>
+                <p class="micro" style="margin-top:.3rem;color:hsl(var(--data))">Within range</p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="card-soft">
+              <p class="micro">How a profile is used</p>
+              <ol class="num-list" style="margin-top:.5rem">
+                <li><span>01</span><span>Grid coordinate resolves the crop assigned to the cell.</span></li>
+                <li><span>02</span><span>That crop's profile is loaded from the configured set.</span></li>
+                <li><span>03</span><span>Sensor values are compared against its minimums.</span></li>
+                <li><span>04</span><span>Any nutrient below its minimum arms the sprayer.</span></li>
+              </ol>
+            </div>
+            <p class="card-soft" style="margin-top:.75rem">
+              <span class="micro" style="color:hsl(var(--signal))">Decision · </span>
+              <span class="body-copy">No nutrient minimum is missed for maize — the rover moves on without spraying.</span>
+            </p>
+            <p class="note">Illustrative values. Moisture and pH are recorded and reported, not sprayed against.</p>
+          </div>
+        </div>
+        <p class="micro" style="margin-top:1.5rem;color:hsl(var(--muted-foreground)/.6);letter-spacing:.06em;text-transform:none">
+          Bar length shows the measured value; the vertical tick marks the configured minimum. All values are illustrative.
+        </p>
+        <p class="note">This is a rule-based threshold system — not machine learning or autonomous agronomic advice.</p>
+      </div>
+
+      <!-- P3 -->
+      <div class="panel" id="profile-p3" role="tabpanel" data-panel="crops:p3" style="margin-top:1.75rem">
+        <div class="split">
+          <div class="profile">
+            <div class="profile-head">
+              <p class="micro">Profile <span style="color:hsl(var(--signal))">P3</span> · Bean</p>
+              <p class="micro">Sample readings</p>
+            </div>
+            <p class="body-copy" style="margin-top:.9rem">Legume — fixes its own nitrogen, so the threshold is far lower.</p>
+            <div class="nutrient">
+              <div class="nutrient-head"><p class="nutrient-name"><b>N</b> · Nitrogen</p><p class="nutrient-state ok">Sufficient</p></div>
+              <div class="bar"><span class="bar-fill ok" style="width:86%"></span><span class="bar-mark" style="left:64%"></span></div>
+              <div class="bar-legend"><span>24 / min 18</span><span>mg/kg</span></div>
+            </div>
+            <div class="nutrient">
+              <div class="nutrient-head"><p class="nutrient-name"><b>P</b> · Phosphorus</p><p class="nutrient-state low">Below minimum</p></div>
+              <div class="bar"><span class="bar-fill low" style="width:70%"></span><span class="bar-mark" style="left:74%"></span></div>
+              <div class="bar-legend"><span>14 / min 15</span><span>mg/kg</span></div>
+            </div>
+            <div class="nutrient">
+              <div class="nutrient-head"><p class="nutrient-name"><b>K</b> · Potassium</p><p class="nutrient-state ok">Sufficient</p></div>
+              <div class="bar"><span class="bar-fill ok" style="width:78%"></span><span class="bar-mark" style="left:64%"></span></div>
+              <div class="bar-legend"><span>30 / min 25</span><span>mg/kg</span></div>
+            </div>
+            <div class="split-even" style="gap:1rem;margin-top:1rem">
+              <div>
+                <p class="micro">Soil moisture · monitored</p>
+                <p style="font-family:var(--font-mono);font-size:1.05rem;margin-top:.3rem">33<small style="font-size:.6rem;color:hsl(var(--muted-foreground))"> % / min 28 %</small></p>
+                <p class="micro" style="margin-top:.3rem;color:hsl(var(--data))">Within range</p>
+              </div>
+              <div>
+                <p class="micro">Soil pH · monitored</p>
+                <p style="font-family:var(--font-mono);font-size:1.05rem;margin-top:.3rem">6.9<small style="font-size:.6rem;color:hsl(var(--muted-foreground))"> / 6–7.5</small></p>
+                <p class="micro" style="margin-top:.3rem;color:hsl(var(--data))">Within range</p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="card-soft">
+              <p class="micro">How a profile is used</p>
+              <ol class="num-list" style="margin-top:.5rem">
+                <li><span>01</span><span>Grid coordinate resolves the crop assigned to the cell.</span></li>
+                <li><span>02</span><span>That crop's profile is loaded from the configured set.</span></li>
+                <li><span>03</span><span>Sensor values are compared against its minimums.</span></li>
+                <li><span>04</span><span>Any nutrient below its minimum arms the sprayer.</span></li>
+              </ol>
+            </div>
+            <p class="card-soft" style="margin-top:.75rem">
+              <span class="micro" style="color:hsl(var(--signal))">Decision · </span>
+              <span class="body-copy">1 of 3 nutrient minimums is not met for bean — phosphorus is armed for this cell.</span>
+            </p>
+            <p class="note">Illustrative values. Moisture and pH are recorded and reported, not sprayed against.</p>
+          </div>
+        </div>
+        <p class="micro" style="margin-top:1.5rem;color:hsl(var(--muted-foreground)/.6);letter-spacing:.06em;text-transform:none">
+          Bar length shows the measured value; the vertical tick marks the configured minimum. All values are illustrative.
+        </p>
+        <p class="note">This is a rule-based threshold system — not machine learning or autonomous agronomic advice.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================== HARDWARE -->
+  <section class="section" id="hardware">
+    <div class="container-x">
+      <div class="section-head reveal">
+        <p class="kicker"><span class="idx">10</span><span class="rule"></span>Hardware &amp; engineering</p>
+        <h2 class="display">
+          Every component earns
+          <span class="serif-accent" style="display:block;color:hsl(var(--signal))">its place on the chassis.</span>
+        </h2>
+        <p class="lead">
+          The prototype is built from accessible, well-understood parts. What matters is how
+          they are arranged: sensing is repeatable, timing is protected, and decisions stay local.
+        </p>
+      </div>
+
+      <div class="split" style="margin-top:2.5rem">
+        <div class="reveal">
+          <figure class="image-frame" style="aspect-ratio:3/2">
+            <img src="assets/img/enclosure.jpg" alt="Arduino UNO R3 mounted in the rover's control enclosure beside the RS485 soil sensor module" />
+            <div class="scrim"></div>
+            <figcaption class="caption">Control enclosure · prototype build</figcaption>
+          </figure>
+          <dl class="dl" style="margin-top:1.5rem">
+            <div><dt>Chassis</dt><dd>Compact wheeled platform sized for single-row travel</dd></div>
+            <div><dt>Drive</dt><dd>N20 geared motors, independently driven through a motor driver</dd></div>
+            <div><dt>Probe</dt><dd>Vertical linear stage driven by a servo, sensor at the tip</dd></div>
+            <div><dt>Sensing</dt><dd>RS485 6-in-1 soil probe · BNO085 IMU · DHT11</dd></div>
+            <div><dt>Control</dt><dd>Arduino UNO R3 (motion, decisions) · ESP32 (connectivity)</dd></div>
+            <div><dt>Output</dt><dd>Relay-switched pump and nozzle for nutrient application</dd></div>
+          </dl>
+        </div>
+
+        <div class="reveal" style="transition-delay:90ms">
+          <p class="micro" style="letter-spacing:.18em">Reliability decisions</p>
+          <div class="rule-list" style="margin-top:1rem">
+            <div>
+              <div style="display:flex;align-items:baseline;gap:.75rem">
+                <span class="micro" style="color:hsl(var(--signal))">01</span>
+                <h3 style="font-size:.86rem;font-weight:500;letter-spacing:-.01em">IMU-based orientation correction</h3>
+              </div>
+              <p class="body-copy" style="margin-top:.4rem;padding-left:1.5rem;font-size:.76rem">
+                Heading comes from the IMU rather than an assumed motor timing, so small wheel-slip
+                errors are corrected during the row instead of being discovered at the end.
+              </p>
+            </div>
+            <div>
+              <div style="display:flex;align-items:baseline;gap:.75rem">
+                <span class="micro" style="color:hsl(var(--signal))">02</span>
+                <h3 style="font-size:.86rem;font-weight:500;letter-spacing:-.01em">Clamped PD control</h3>
+              </div>
+              <p class="body-copy" style="margin-top:.4rem;padding-left:1.5rem;font-size:.76rem">
+                The correction term is bounded. A sudden large heading error produces a measured
+                response rather than a motor spike that overshoots the line.
+              </p>
+            </div>
+            <div>
+              <div style="display:flex;align-items:baseline;gap:.75rem">
+                <span class="micro" style="color:hsl(var(--signal))">03</span>
+                <h3 style="font-size:.86rem;font-weight:500;letter-spacing:-.01em">Active reverse-pulse braking</h3>
+              </div>
+              <p class="body-copy" style="margin-top:.4rem;padding-left:1.5rem;font-size:.76rem">
+                Drive is briefly reversed to arrest momentum at each cell, so the probe descends at
+                the same relative position every time.
+              </p>
+            </div>
+            <div>
+              <div style="display:flex;align-items:baseline;gap:.75rem">
+                <span class="micro" style="color:hsl(var(--signal))">04</span>
+                <h3 style="font-size:.86rem;font-weight:500;letter-spacing:-.01em">Probe torque holding</h3>
+              </div>
+              <p class="body-copy" style="margin-top:.4rem;padding-left:1.5rem;font-size:.76rem">
+                The servo holds its position under load rather than driving open-loop, keeping the
+                sensor at depth while the reading settles.
+              </p>
+            </div>
+            <div>
+              <div style="display:flex;align-items:baseline;gap:.75rem">
+                <span class="micro" style="color:hsl(var(--signal))">05</span>
+                <h3 style="font-size:.86rem;font-weight:500;letter-spacing:-.01em">Servo-actuated probing</h3>
+              </div>
+              <p class="body-copy" style="margin-top:.4rem;padding-left:1.5rem;font-size:.76rem">
+                Replacing a hand-held probe with a repeatable actuator removes operator variation
+                from the measurement itself.
+              </p>
+            </div>
+            <div>
+              <div style="display:flex;align-items:baseline;gap:.75rem">
+                <span class="micro" style="color:hsl(var(--signal))">06</span>
+                <h3 style="font-size:.86rem;font-weight:500;letter-spacing:-.01em">RS485 Modbus sensing</h3>
+              </div>
+              <p class="body-copy" style="margin-top:.4rem;padding-left:1.5rem;font-size:.76rem">
+                Differential signalling is far more tolerant of motor noise than a short analog line,
+                which matters on a moving chassis with two controllers.
+              </p>
+            </div>
+            <div>
+              <div style="display:flex;align-items:baseline;gap:.75rem">
+                <span class="micro" style="color:hsl(var(--signal))">07</span>
+                <h3 style="font-size:.86rem;font-weight:500;letter-spacing:-.01em">Separated control and connectivity</h3>
+              </div>
+              <p class="body-copy" style="margin-top:.4rem;padding-left:1.5rem;font-size:.76rem">
+                Wi-Fi stack behaviour cannot stall the motor loop. The ESP32 can drop a packet
+                without the rover missing a turn.
+              </p>
+            </div>
+          </div>
+          <p class="note">Known limits: row-spacing calibration and long-row drift are still being improved. No claim is made that the prototype is field-proven beyond the competition environment.</p>
+        </div>
+      </div>
+
+      <div class="reveal" style="margin-top:4.5rem">
+        <div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:1rem">
+          <h2 class="display-sm">Continue through the project</h2>
+          <p class="micro">Four pages · one system</p>
+        </div>
+        <div class="next-grid">
+          <a class="next-card" href="index.html">
+            <span class="nc-num">01</span><span class="nc-title">Overview</span>
+            <span class="nc-desc">The agricultural problem, the system that answers it, and the principle behind it.</span>
+            <svg class="nc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </a>
+          <a class="next-card" href="autonomy.html">
+            <span class="nc-num">03</span><span class="nc-title">Autonomy</span>
+            <span class="nc-desc">Navigation without GPS, and the telemetry the farmer sees during a mission.</span>
+            <svg class="nc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </a>
+          <a class="next-card" href="impact.html">
+            <span class="nc-num">04</span><span class="nc-title">Impact</span>
+            <span class="nc-desc">What the prototype demonstrates, what it should deliver, and what still needs trials.</span>
+            <svg class="nc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container-x">
+    <div class="footer-grid">
+      <div>
+        <p class="footer-brand">Fibonacci 2026</p>
+        <p class="footer-sub">Autonomous smart farming rover</p>
+        <p class="footer-copy">
+          A sense-to-decide-to-act agricultural system built for the EduStream / WSRO Fibonacci
+          international competition. Prototype documentation — all interface data shown on this
+          site is illustrative.
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>Pages</h4>
+        <nav class="footer-links" aria-label="Pages">
+          <a href="index.html">Overview <span>01</span></a>
+          <a href="technology.html">Technology <span>02</span></a>
+          <a href="autonomy.html">Autonomy <span>03</span></a>
+          <a href="impact.html">Impact <span>04</span></a>
+        </nav>
+      </div>
+      <div class="footer-col">
+        <h4>Project</h4>
+        <p class="micro" style="line-height:2;color:hsl(var(--muted-foreground)/.8)">
+          Fibonacci 2026 · Italy · Prototype build
+        </p>
+        <button class="to-top micro" data-to-top style="margin-top:1rem;letter-spacing:.14em">
+          Back to top
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Fibonacci 2026</span>
+      <p class="disclaimer">
+        No team members, sponsors or trial results are listed — only the delivered prototype is described.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Autonomy &amp; Data — Fibonacci 2026</title>
+<meta name="description" content="Navigation without GPS, and the telemetry the farmer sees during a mission." />
+<meta name="theme-color" content="#05070A" />
+<link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+<link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span> Fibonacci 2026</a>
+    <div class="header-actions">
+      <button class="icon-btn wide" data-presentation aria-pressed="false" title="Toggle presentation mode">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+        <span class="presentation-label presentation-hide">Present</span>
+      </button>
+      <button class="icon-btn" data-menu-open aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="site-menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="brand"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span> Fibonacci 2026</span>
+    <button class="icon-btn" data-menu-close aria-label="Close menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <div class="menu-body">
+    <nav class="menu-list" aria-label="Pages">
+      <a class="menu-item" href="index.html">
+        <span class="num">01</span><span class="name">Overview</span>
+        <span class="desc">The agricultural problem, the system that answers it, and the principle behind it.</span>
+      </a>
+      <a class="menu-item" href="technology.html">
+        <span class="num">02</span><span class="name">Technology</span>
+        <span class="desc">Operating modes, per-cell decisions, crop profiles, architecture and hardware.</span>
+      </a>
+      <a class="menu-item is-current" href="autonomy.html">
+        <span class="num">03</span><span class="name">Autonomy</span>
+        <span class="desc">Navigation without GPS, and the telemetry the farmer sees during a mission.</span>
+      </a>
+      <a class="menu-item" href="impact.html">
+        <span class="num">04</span><span class="name">Impact</span>
+        <span class="desc">What the prototype demonstrates, what it should deliver, and what still needs trials.</span>
+      </a>
+    </nav>
+    <aside class="menu-aside">
+      <div>
+        <h4>On this page</h4>
+        <ul>
+          <li><a href="#navigation">08 · Autonomous navigation</a></li>
+          <li><a href="#dashboard">09 · Live farmer dashboard</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Elsewhere</h4>
+        <ul>
+          <li><a href="technology.html#modes">Operating modes</a></li>
+          <li><a href="technology.html#architecture">System architecture</a></li>
+          <li><a href="impact.html#roadmap">Roadmap</a></li>
+        </ul>
+      </div>
+      <p class="micro" style="line-height:1.9;color:hsl(var(--muted-foreground)/.65)">
+        EduStream / WSRO · Fibonacci International Competition · Italy 2026
+      </p>
+    </aside>
+  </div>
+</div>
+
+<main>
+
+  <!-- ================================================================= HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="container-x">
+      <p class="hero-badge"><span class="dot" aria-hidden="true"></span> 03 <span class="sep">·</span> Autonomy &amp; data</p>
+      <h1>
+        No GPS in the loop.
+        <span class="serif-accent">A heading, a grid, a repeatable stop.</span>
+      </h1>
+      <p class="lead">
+        Navigation is relative and local, so the rover works under canopy and between rows.
+        Everything it measures is published to the farmer as the mission runs.
+      </p>
+      <div class="chips">
+        <span class="chip">Serpentine traversal</span>
+        <span class="chip">IMU heading</span>
+        <span class="chip">PD correction</span>
+        <span class="chip">Blynk telemetry</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================== NAVIGATION -->
+  <section class="section" id="navigation">
+    <div class="container-x">
+      <div class="section-head reveal">
+        <p class="kicker"><span class="idx">08</span><span class="rule"></span>Autonomous navigation</p>
+        <h2 class="display">
+          No GPS in the loop.
+          <span class="serif-accent" style="display:block;color:hsl(var(--signal))">A heading, a grid, a repeatable stop.</span>
+        </h2>
+        <p class="lead">
+          Navigation is relative and local. The rover follows a predefined grid using inertial
+          feedback, which keeps it working under canopy, between rows and anywhere a satellite
+          fix is unreliable. GPS, when fitted, is for logging — not for steering.
+        </p>
+      </div>
+
+      <div class="grid-cards" style="margin-top:2.5rem">
+        <article class="card reveal">
+          <p class="card-num">01</p>
+          <h3>Serpentine grid traversal</h3>
+          <p>The mission is a fixed sequence of cells. The rover crosses each row, turns at the headland, shifts one row and returns — no path planning is improvised in the field.</p>
+        </article>
+        <article class="card reveal" style="transition-delay:60ms">
+          <p class="card-num">02</p>
+          <h3>Closed-loop 90° turns</h3>
+          <p>Every turn is measured, not timed. The IMU reports actual rotation and the controller stops when the heading target is reached.</p>
+        </article>
+        <article class="card reveal" style="transition-delay:120ms">
+          <p class="card-num">03</p>
+          <h3>IMU heading reference</h3>
+          <p>The BNO085 provides orientation continuously, so the rover knows its heading without satellite positioning.</p>
+        </article>
+        <article class="card reveal" style="transition-delay:60ms">
+          <p class="card-num">04</p>
+          <h3>PD drift correction</h3>
+          <p>Heading error and its rate drive a proportional-derivative correction, clamped so a large error cannot command an aggressive motor spike.</p>
+        </article>
+        <article class="card reveal" style="transition-delay:120ms">
+          <p class="card-num">05</p>
+          <h3>Active reverse-pulse braking</h3>
+          <p>Instead of coasting into the next cell, drive is briefly reversed to arrest momentum, improving repeatability of the stop position.</p>
+        </article>
+        <article class="card-soft reveal" style="transition-delay:180ms;display:flex;flex-direction:column;justify-content:space-between;gap:1rem">
+          <p class="micro" style="letter-spacing:.18em">Headland turn sequence</p>
+          <div class="turn-strip" style="border:0;background:transparent;padding:0">
+            <span class="ts-item">Backup</span>
+            <span class="ts-arrow">→</span>
+            <span class="ts-item">Turn</span>
+            <span class="ts-arrow">→</span>
+            <span class="ts-item">Shift column</span>
+            <span class="ts-arrow">→</span>
+            <span class="ts-item">Turn</span>
+          </div>
+          <p class="body-copy" style="font-size:.75rem">
+            Reversing clear of the row before turning keeps the probe and chassis away from crop
+            rows, and makes the entry into the next row repeatable rather than approximate.
+          </p>
+        </article>
+      </div>
+
+      <!-- serpentine widget -->
+      <div class="reveal" style="margin-top:2.5rem">
+        <div class="card-soft" style="padding:1rem">
+          <div class="field-head">
+            <div style="display:flex;align-items:center;gap:.75rem">
+              <span class="mono-label">Serpentine traversal</span>
+              <span class="micro" data-serpentine-status style="color:hsl(var(--signal))">B-06</span>
+            </div>
+            <span class="micro" data-serpentine-step>Step 7/24 · west</span>
+          </div>
+          <div data-serpentine></div>
+          <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.75rem;margin-top:1rem;padding-top:.9rem;border-top:1px solid hsl(var(--border)/.5)">
+            <div style="display:flex;gap:1rem">
+              <span class="legend-item"><span class="legend-swatch a"></span>Profile A</span>
+              <span class="legend-item"><span class="legend-swatch b"></span>Profile B</span>
+            </div>
+            <div style="display:flex;gap:.4rem">
+              <button class="btn btn-ghost" style="height:2.2rem;padding-inline:.9rem;font-size:.52rem" data-serpentine-toggle>Pause</button>
+              <button class="btn btn-ghost" style="height:2.2rem;padding-inline:.9rem;font-size:.52rem" data-serpentine-restart>Restart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="split-even" style="margin-top:1.5rem;gap:1.5rem">
+        <div class="card-soft reveal">
+          <p class="micro"><span style="color:hsl(var(--signal))">Coordinate → profile · </span> the column number selects the crop profile, so profile A and profile B alternate across the field.</p>
+        </div>
+        <div class="card-soft reveal" style="transition-delay:60ms">
+          <p class="micro"><span style="color:hsl(var(--amber))">Honest limitation · </span> row spacing and centimetre-level field calibration are the next stage; drift still accumulates on long rows.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ DASHBOARD -->
+  <section class="section" id="dashboard">
+    <div class="container-x">
+      <div class="section-head reveal">
+        <p class="kicker"><span class="idx">09</span><span class="rule"></span>Live farmer dashboard</p>
+        <h2 class="display">
+          The field, as the rover
+          <span class="serif-accent" style="display:block;color:hsl(var(--signal))">reports it.</span>
+        </h2>
+        <p class="lead">
+          During a mission the ESP32 publishes soil readings, position in the grid and sprayer
+          state to Blynk. The farmer sees the same measurements the rover is deciding on — not a
+          summary written afterwards.
+        </p>
+      </div>
+
+      <div class="dash reveal" style="margin-top:2.5rem" data-dashboard>
+        <div class="dash-head">
+          <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap">
+            <p class="micro" style="letter-spacing:.18em;color:hsl(var(--foreground)/.8)">Mission dashboard</p>
+            <span class="live-dot"><i></i>Simulated</span>
+          </div>
+          <button class="btn btn-ghost" style="height:2.1rem;padding-inline:.85rem;font-size:.5rem" data-feed-toggle aria-pressed="false">Pause feed</button>
+        </div>
+
+        <div class="dash-grid">
+          <div class="dash-cell">
+            <p class="dc-k">Grid cell</p>
+            <p class="dc-v" data-dc="cell" style="color:hsl(var(--signal))">B-02</p>
+            <p class="dc-sub">M3 · 2:2 intercrop</p>
+          </div>
+          <div class="dash-cell">
+            <p class="dc-k">Heading</p>
+            <p class="dc-v" data-dc="heading">95<small>°</small></p>
+            <p class="dc-sub">IMU · BNO085</p>
+          </div>
+          <div class="dash-cell">
+            <p class="dc-k">Sprayer</p>
+            <p class="dc-v" data-dc="sprayer" style="color:hsl(var(--signal))">ON</p>
+            <p class="dc-sub">relay · nozzle</p>
+          </div>
+          <div class="dash-cell">
+            <p class="dc-k">Mission progress</p>
+            <p class="dc-v">70<small>%</small></p>
+            <p class="dc-sub">17 of 24 cells</p>
+          </div>
+
+          <div class="dash-cell">
+            <p class="dc-k">Soil moisture</p>
+            <p class="dc-v" data-dc="moisture">29.1<small>%</small></p>
+            <p class="dc-sub">root zone</p>
+          </div>
+          <div class="dash-cell">
+            <p class="dc-k">Soil temperature</p>
+            <p class="dc-v" data-dc="soiltemp">20.8<small>°C</small></p>
+            <p class="dc-sub">probe tip</p>
+          </div>
+          <div class="dash-cell">
+            <p class="dc-k">Soil pH</p>
+            <p class="dc-v" data-dc="ph">6.8</p>
+            <p class="dc-sub">monitored</p>
+          </div>
+          <div class="dash-cell">
+            <p class="dc-k">Nitrogen (N)</p>
+            <p class="dc-v" data-dc="n">21<small>mg/kg</small></p>
+            <p class="dc-sub">vs profile minimum</p>
+          </div>
+
+          <div class="dash-cell">
+            <p class="dc-k">Phosphorus (P)</p>
+            <p class="dc-v" data-dc="p">18<small>mg/kg</small></p>
+            <p class="dc-sub">vs profile minimum</p>
+          </div>
+          <div class="dash-cell">
+            <p class="dc-k">Potassium (K)</p>
+            <p class="dc-v" data-dc="k">49<small>mg/kg</small></p>
+            <p class="dc-sub">vs profile minimum</p>
+          </div>
+          <div class="dash-cell">
+            <p class="dc-k">Air temperature</p>
+            <p class="dc-v" data-dc="airtemp">25.2<small>°C</small></p>
+            <p class="dc-sub">DHT11</p>
+          </div>
+          <div class="dash-cell">
+            <p class="dc-k">Air humidity</p>
+            <p class="dc-v" data-dc="humidity">61<small>%</small></p>
+            <p class="dc-sub">DHT11</p>
+          </div>
+        </div>
+
+        <div class="trace-box">
+          <div class="trace-head">
+            <p class="micro">Soil moisture trace</p>
+            <p class="micro" style="color:hsl(var(--signal))" data-dc="traceval">29.1%</p>
+          </div>
+          <svg class="spark" viewBox="0 0 300 72" preserveAspectRatio="none" role="img" aria-label="Soil moisture readings over the last sixteen samples"></svg>
+          <p class="micro" style="margin-top:.5rem;color:hsl(var(--muted-foreground)/.6)">Last 16 readings</p>
+        </div>
+
+        <div class="log-box">
+          <p class="micro" style="letter-spacing:.18em;margin-bottom:.5rem">Mission log</p>
+          <ul>
+            <li><b>Cell B-02</b> · N 21 mg/kg · spray 0.8 s <span class="badge-spray">●</span></li>
+            <li><b>Cell C-03</b> · N 24 mg/kg · spray 0.8 s <span class="badge-spray">●</span></li>
+            <li><b>Cell C-02</b> · N 23 mg/kg · spray 0.8 s <span class="badge-spray">●</span></li>
+            <li><b>Cell C-01</b> · N 22 mg/kg · spray 0.8 s <span class="badge-spray">●</span></li>
+            <li><b>Cell B-04</b> · N 23 mg/kg · spray 0.8 s <span class="badge-spray">●</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="note">Website demonstration using simulated values. Not connected to the rover or to a Blynk account.</p>
+
+      <div class="reveal" style="margin-top:4.5rem">
+        <div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:1rem">
+          <h2 class="display-sm">Continue through the project</h2>
+          <p class="micro">Four pages · one system</p>
+        </div>
+        <div class="next-grid">
+          <a class="next-card" href="index.html">
+            <span class="nc-num">01</span><span class="nc-title">Overview</span>
+            <span class="nc-desc">The agricultural problem, the system that answers it, and the principle behind it.</span>
+            <svg class="nc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </a>
+          <a class="next-card" href="technology.html">
+            <span class="nc-num">02</span><span class="nc-title">Technology</span>
+            <span class="nc-desc">Operating modes, per-cell decisions, crop profiles, architecture and hardware.</span>
+            <svg class="nc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </a>
+          <a class="next-card" href="impact.html">
+            <span class="nc-num">04</span><span class="nc-title">Impact</span>
+            <span class="nc-desc">What the prototype demonstrates, what it should deliver, and what still needs trials.</span>
+            <svg class="nc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container-x">
+    <div class="footer-grid">
+      <div>
+        <p class="footer-brand">Fibonacci 2026</p>
+        <p class="footer-sub">Autonomous smart farming rover</p>
+        <p class="footer-copy">
+          A sense-to-decide-to-act agricultural system built for the EduStream / WSRO Fibonacci
+          international competition. Prototype documentation — all interface data shown on this
+          site is illustrative.
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>Pages</h4>
+        <nav class="footer-links" aria-label="Pages">
+          <a href="index.html">Overview <span>01</span></a>
+          <a href="technology.html">Technology <span>02</span></a>
+          <a href="autonomy.html">Autonomy <span>03</span></a>
+          <a href="impact.html">Impact <span>04</span></a>
+        </nav>
+      </div>
+      <div class="footer-col">
+        <h4>Project</h4>
+        <p class="micro" style="line-height:2;color:hsl(var(--muted-foreground)/.8)">
+          Fibonacci 2026 · Italy · Prototype build
+        </p>
+        <button class="to-top micro" data-to-top style="margin-top:1rem;letter-spacing:.14em">
+          Back to top
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Fibonacci 2026</span>
+      <p class="disclaimer">
+        No team members, sponsors or trial results are listed — only the delivered prototype is described.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
